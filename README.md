@@ -11,19 +11,19 @@ This repository documents the analysis of a packet capture (`.pcap`) file contai
 To isolate the credentials efficiently, the following network analysis steps were performed:
 
 1. **Traffic Filtering**: Applied display filters to isolate HTTP methods commonly used for authentication:
-   `http.request.method == "POST" || http.request.method == "GET"`
+   `http.request.method == "POST" || http.request.method == "GET"` OR: `http.request.method in {"GET","POST"}`
 </br>
-<img src="https://imgur.com/Jznmaze.png"/>
+<img src=https://imgur.com/3vKTxee.png/>
 </br>
 <img src="https://imgur.com/YKcDLxA.png"/>
 
-2. **Stream Reconstruction**: Located the relevant authentication request and used Wireshark's **Follow TCP Stream** feature to reconstruct the full plaintext conversation between the client and server.
+3. **Stream Reconstruction**: Located the relevant authentication request and used Wireshark's **Follow TCP Stream** feature to reconstruct the full plaintext conversation between the client and server.
 </br>  
 <img src="https://imgur.com/pQDkF9v.png"/>
 </br>
 <img src="https://imgur.com/CCYB8NS.png"/>
 
-3. **Data Extraction**: Inspected the application payload and HTTP headers to identify the parameters holding the sensitive data.
+4. **Data Extraction**: Inspected the application payload and HTTP headers to identify the parameters holding the sensitive data.
 </br>
 <img src="https://imgur.com/X5E196m.png"/>
 
