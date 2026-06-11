@@ -11,7 +11,7 @@ This repository documents the analysis of a packet capture (`.pcap`) file contai
 To isolate the credentials efficiently, the following network analysis steps were performed:
 
 1. **Traffic Filtering**: Applied display filters to isolate HTTP methods commonly used for authentication:
-   `http.request.method == "POST" || http.request.method == "GET"` OR: `http.request.method in {"GET","POST"}`
+    `http.request.method in {"GET","POST"}` OR: `http.request.method == "POST" || http.request.method == "GET"`
 </br>
 <img src=https://imgur.com/3vKTxee.png/>
 </br>
@@ -27,20 +27,15 @@ To isolate the credentials efficiently, the following network analysis steps wer
 </br>
 <img src="https://imgur.com/X5E196m.png"/>
 
-## Findings & Evidence
+## Findings & Evidence 
 Because the traffic used unencrypted HTTP instead of HTTPS, all transmitted data was exposed in cleartext.
 </br>
 <img src="https://imgur.com/twAuIXJ.png"/>
 
-* **Target URL/Endpoint:** `http://[INSERT_TARGET_IP_OR_DOMAIN]/[INSERT_LOGIN_PATH]`
-* **HTTP Method Used:** `[POST / GET]`
-* **Discovered Username:** `[INSERT USERNAME HERE]`
-* **Discovered Password:** `[INSERT PASSWORD HERE]`
-
-### Packet Payload Snippet
-```text
-[PASTE THE EXACT LINE OR PORTION OF THE TCP STREAM SHOWING THE CREDENTIALS HERE]
-```
+* **Target URL/Endpoint:** `http://juice-shop.herokuapp.com/rest/user/login`
+* **HTTP Method Used:** `POST / GET`
+* **Discovered Username:** `"someuser@gmail.com"`
+* **Discovered Password:** `"ThisIsClearText123"`
 
 ## Security Recommendations
 To mitigate the credential harvesting vulnerability demonstrated in this lab, the following controls should be implemented:
